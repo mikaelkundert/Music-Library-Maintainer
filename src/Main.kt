@@ -1,4 +1,5 @@
 import java.io.File
+import java.util.LinkedList
 import kotlin.system.exitProcess
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -11,8 +12,31 @@ fun main(args: Array<String>) {
     val musicLibraryRoot = File(args[0])
     println("Music library root: '${musicLibraryRoot.absolutePath}'")
 
-    if (!musicLibraryRoot.exists()) {
-        exitWithError("Given path '${musicLibraryRoot.path}' does not exist!")
+    listAllFilesInDirectoryTree(musicLibraryRoot)
+    println("Completed")
+}
+
+fun listAllFilesInDirectoryTree(filepath: File) {
+    if (!filepath.exists()) {
+        exitWithError("Tried to list files from non-existing filepath '${filepath.absolutePath}'")
+    }
+
+    val stack = LinkedList<File>()
+    stack.push(filepath)
+
+    while (stack.isNotEmpty()) {
+        val currentFilepath = stack.pop()
+        val files = currentFilepath.listFiles()
+
+        if (files != null) {
+            for (file in files) {
+                if (file.isDirectory) {
+                    stack.push(file)
+                } else {
+                    println("Found file: '${file.absolutePath}'")
+                }
+            }
+        }
     }
 }
 
