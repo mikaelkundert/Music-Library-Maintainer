@@ -14,6 +14,11 @@ fun main(args: Array<String>) {
     println("Completed")
 }
 
+fun exitWithError(message: String) {
+    System.err.println(message)
+    exitProcess(1)
+}
+
 fun listAllFilesInDirectoryTree(filepath: File) {
     if (!filepath.exists()) {
         exitWithError("Tried to list files from non-existing filepath '${filepath.absolutePath}'")
@@ -36,9 +41,4 @@ fun listAllFilesInDirectoryTree(filepath: File) {
             }
         }
     }
-}
-
-fun exitWithError(message: String) {
-    System.err.println(message)
-    exitProcess(1)
 }
