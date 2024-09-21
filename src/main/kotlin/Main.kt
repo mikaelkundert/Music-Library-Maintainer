@@ -1,3 +1,5 @@
+package fi.kundert
+
 import java.io.File
 import java.util.LinkedList
 import kotlin.system.exitProcess
