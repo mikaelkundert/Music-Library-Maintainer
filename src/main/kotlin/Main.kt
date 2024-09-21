@@ -50,7 +50,7 @@ fun listAllFilesInDirectoryTree(filepath: File) {
 
 fun auditFile(file: File) {
     val supportedExtension = "flac"
-    if (file.extension != supportedExtension) return;
+    if (file.extension != supportedExtension) return
 
     println("Found file: '${file.absolutePath}'")
     AudioFileIO.logger.level = Level.OFF
